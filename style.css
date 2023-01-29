@@ -1,0 +1,214 @@
+
+
+
+
+
+
+
+
+
+.profile__profession{
+    margin: 0;
+    font-family: 'Inter', Arial, sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+    color: #fff;
+}
+
+.profile__edit{
+    align-self: center;
+    max-width: 24px;
+    height: 24px;
+    width: 100%;
+    border: 0;
+    border-radius: 0;
+    background: url(./images/Edit\ Button.svg) center no-repeat;
+    padding: 0;
+    margin: 0 0 0 18px;
+}
+
+.profile_add{
+    justify-self: flex-end;
+    align-self: center;
+    max-width: 150px;
+    max-height: 50px;
+    width: 100%;
+    height: 100%;
+    background: url(./images/Add\ Button.svg) center no-repeat;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+}
+
+.gallery{
+    margin: 47.25px auto 0 auto;
+    padding: 0;
+    max-width: 880px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    box-sizing: border-box;
+    justify-content: center;
+    column-gap: 17px;
+    row-gap: 20px;
+}
+
+.gallery__element{
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.gallery__image{
+    width: 100%;
+    object-fit: cover;
+    border-radius: 10px 10px 0 0;
+}
+
+.gallery__description{
+    margin: 0;
+    padding: 0;
+    max-width: 282px;
+    width: 100%;
+    min-height: 79px;
+    background-color: #fff;
+    display: flex;
+    justify-content: space-between;
+    border-radius: 0 0 10px 10px;
+}
+
+.gallery__caption{
+    align-self: center;
+    margin: 0 0 0 20px;
+    padding: 0;
+    font-family: 'Inter', Arial, sans-serif;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 24px;
+    line-height: 1.20;
+    color: #000;
+}
+
+.gallery__like{
+    align-self: center;
+    max-width: 22px;
+    width: 100%;
+    height: 19px;
+    background-image: url(./images/Vector.svg);
+    margin: 0 15px 0 0;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+}
+
+.gallery__like-active {
+    transition: .5s all;
+    background-image: url(./images/Union.svg);
+}
+
+.footer{
+    max-width: 880px;
+    margin: 67px auto 60px auto;
+    padding: 0;
+}
+
+.footer__text{
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', Arial, sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1.2;
+    color: #545454;
+}
+
+.popup{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background-color: rgba(0, 0, 0, .5);
+    z-index: 1;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    row-gap: 8px;
+}
+
+.popup-active{
+    display: flex;
+}
+
+.popup__container{
+    max-width: 430px;
+    max-height: 100%;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    background-color: #fff;
+}
+
+.popup__title{
+    margin: 34px 64px 24px 36px;
+    padding: 0;
+    max-width: 330px;
+    font-family: 'Inter', Arial, sans-serif;;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 24px;
+    line-height: 1.20;
+    color: #000;
+}
+
+.popup__text{
+    margin: 30px 36px 0 36px;
+    padding: 0 0 13px 0;
+    max-width: 358px;
+    font-family: 'Inter', Arial, sans-serif;;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color: #000000;
+    border: none;
+    border-bottom: 1px rgba(0, 0, 0, .2) solid;
+    box-sizing: border-box;
+}
+
+.popup__text:focus{
+    outline: none;
+}
+
+.popup__save{
+    text-align: center;
+    background-color: #000;
+    width: 358px;
+    height: 50px;
+    margin: 48px 36px 37px 36px;
+    padding: 0;
+    border: none;
+    color: #fff;
+    font-family: 'Inter', Arial, sans-serif;;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1.22;
+    cursor: pointer;
+}
+
+.popup__close{
+    padding: 0;
+    margin: 0;
+    border: none;
+    min-width: 32px;
+    min-height: 32px;
+    background-color: rgba(0, 0, 0, .5);
+    background-image: url(./images/Close\ Icon.png);
+}
