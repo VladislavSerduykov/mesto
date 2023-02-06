@@ -13,6 +13,13 @@ jobInput.value = profileJob.textContent
 
 console.log(nameInput.value)
 
+asdasd
+asdasdasd
+asdasdasdasd
+asdasdasdasdasd
+asd
+asdasdasdasdasd
+
 editProfile.addEventListener('click', function() {
     popup.classList.add('popup-active');
 })
