@@ -4,15 +4,14 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./vendor/normalize.css">
     <link rel="stylesheet" href="./pages/index.css">
     <title>mesto</title>
 </head>
 <body class="page">
-    <main>
-        <header class="header">
+    <header class="header">
             <img class="header__logo" src="./images/logo.svg" alt="Логотип">
-        </header>
+    </header>
+    <main>
         <section class="profile">
             <img class="profile__image" src="./images/Avatar.png" alt="Фото профиля">
             <div class="profile__info">
@@ -24,21 +23,12 @@
             </div>
             <button class="profile__add" type="button"></button>
         </section>
-        <section class="popup">
-            <form class="popup__container">
-                <h2 class="popup__title">Редактировать профиль</h2>
-                <input class="popup__name popup__text" type="text">
-                <input class="popup__job popup__text" type="text">
-                <button class="popup__save" type="submit">Сохранить</button>
-                <button class="popup__close"></button>
-            </form>
-        </section>
         <section class="gallery">
             <article class="gallery__element">
                 <img class="gallery__image" src="./images/church.jpg" alt="Храм на горе">
                 <div class="gallery__description">
                     <h2 class="gallery__caption">Карачаевск</h2>
-                    <button class="gallery__like" type="submit"></button>
+                    <button class="gallery__like" type="button"></button>
                 </div>
             </article>
             <article class="gallery__element">
@@ -81,6 +71,17 @@
     <footer class="footer">
         <p class="footer__text">© 2020 Mesto Russia</p>
     </footer>
-    <script src="./index.js"></script>
+    <section class="popup">
+        <div class="popup__container">
+            <button class="popup__close" type="button"></button>
+            <h2 class="popup__title">Редактировать профиль</h2>
+            <form class="popup__form" name="save-name-profession">
+                <input class="popup__text popup__text_value_name" type="text" name="name">
+                <input class="popup__text popup__text_value_profession" type="text" name="profession">
+                <button class="popup__save" type="submit">Сохранить</button>
+            </form>
+        </div>
+    </section>
+    <script src="./scripts/index.js"></script>
 </body>
 </html>

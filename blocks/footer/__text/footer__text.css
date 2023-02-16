@@ -5,13 +5,13 @@
     font-style: normal;
     font-weight: 400;
     font-size: 18px;
-    line-height: 1.2;
+    line-height: 17px;
     color: #545454;
 }
 
 @media screen and (max-width: 370px){
     .footer__text{
         font-size: 14px;
-        line-height: 1.21;
+        line-height: 17px;
     }
 }
