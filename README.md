@@ -5,4 +5,4 @@ __<h1>Проектная работа - Место.</h1>__
 
 **Ссылка на проект**
 
-* [Публичная ссылка на ПР№3](https://vladislavserduykov.github.io/russian-travel/index.html) 
+* [Публичная ссылка на ПР№3](git ) 
