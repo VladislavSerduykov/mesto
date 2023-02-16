@@ -1,6 +1,23 @@
 .profile__info{
-    align-self: center;
     display: flex;
-    flex-wrap: wrap;
-    max-width: 336px;
+    flex-direction: column;
+    gap: 16px;
+    flex-grow: 1;
+    max-width: 62,5%;
+}
+
+@media screen and (max-width: 600px){
+    .profile__info{
+        max-width: 45%;
+    }
+}
+
+@media screen and (max-width: 370px){
+    .profile__info{
+        gap: 14px;
+        align-items: stretch;
+        margin: 22.25px auto 36px auto;
+        max-width: 282px;
+        width: 100%;
+    }
 }

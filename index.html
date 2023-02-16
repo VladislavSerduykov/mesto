@@ -5,7 +5,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./vendor/normalize.css">
-    <link rel="stylesheet" href="./style.css">
     <link rel="stylesheet" href="./pages/index.css">
     <title>mesto</title>
 </head>
@@ -17,19 +16,21 @@
         <section class="profile">
             <img class="profile__image" src="./images/Avatar.png" alt="Фото профиля">
             <div class="profile__info">
-                <h2 class="profile__name">Жак-Ив Кусто</h2>
-                <button class="profile__edit" type="button"></button>
+                <div class="profile__info-name">
+                    <h1 class="profile__name">Жак-Ив Кусто</h1>
+                    <button class="profile__edit" type="button"></button>
+                </div>
                 <p class="profile__profession">Исследователь Океана</p> 
             </div>
-            <button class="profile_add" type="button"></button>
+            <button class="profile__add" type="button"></button>
         </section>
         <section class="popup">
-            <button class="popup__close"></button>
-            <form action="" class="popup__container">
+            <form class="popup__container">
                 <h2 class="popup__title">Редактировать профиль</h2>
                 <input class="popup__name popup__text" type="text">
                 <input class="popup__job popup__text" type="text">
                 <button class="popup__save" type="submit">Сохранить</button>
+                <button class="popup__close"></button>
             </form>
         </section>
         <section class="gallery">
@@ -71,7 +72,7 @@
             <article class="gallery__element">
                 <img class="gallery__image" src="./images/church.jpg" alt="Храм на горе">
                 <div class="gallery__description">
-                    <h2 class="gallery__caption">Карачаевск</h2>
+                    <h2 class="gallery__caption">Карачаево-Черкесия</h2>
                     <button class="gallery__like" type="button"></button>
                 </div>
             </article>
@@ -80,6 +81,6 @@
     <footer class="footer">
         <p class="footer__text">© 2020 Mesto Russia</p>
     </footer>
-    <script src="./script.js"></script>
+    <script src="./index.js"></script>
 </body>
 </html>

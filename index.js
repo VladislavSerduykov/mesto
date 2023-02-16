@@ -11,15 +11,14 @@ let formElemnt = document.querySelector('.popup__container')
 nameInput.value = profileName.textContent
 jobInput.value = profileJob.textContent
 
-console.log(nameInput.value)
 
 editProfile.addEventListener('click', function() {
-    popup.classList.add('popup-active');
+    popup.classList.add('popup_opened');
 })
 
 
 closeEditProfile.addEventListener('click', function(){
-    popup.classList.remove('popup-active')
+    popup.classList.remove('popup_opened')
 })
 
 function handleForm(evt){
@@ -28,7 +27,7 @@ function handleForm(evt){
     profileName.textContent = nameInput.value;
     profileJob.textContent = jobInput.value;
 
-    popup.classList.remove('popup-active')
+    popup.classList.remove('popup_opened')
 }
 
 
@@ -39,7 +38,3 @@ for (let i=0; i<gallery.length; i++) {
         gallery[i].classList.toggle('gallery__like-active')
     })
 }
-
-
-
-

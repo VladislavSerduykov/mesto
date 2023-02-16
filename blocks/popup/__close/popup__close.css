@@ -1,0 +1,23 @@
+.popup__close{
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0;
+    margin: 0;
+    border: none;
+    width: 32px;
+    height: 32px;
+    background-color: rgba(0, 0, 0, .5);
+    background: url(../../../images/Close\ Icon.png);
+    transform: translate(calc(100% + 8px), calc(-100% - 8px));
+    cursor: pointer;
+}
+
+@media screen and (max-width: 370px){
+    .popup__close{
+        width: 20px;
+        height: 20px;
+        background: url(../../../images/Close\ Icon\ 320px.png);
+        transform: translateY(-36px);
+    }
+}
