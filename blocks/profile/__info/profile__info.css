@@ -6,16 +6,18 @@
     max-width: calc(100% - (150px + 120px + 60px));
 }
 
-@media screen and (max-width: 600px){
+
+@media screen and (max-width:560px) {
     .profile__info{
-        max-width: 30%;
+        max-width: 95%;
+        text-align: center;
     }
 }
 
 @media screen and (max-width: 370px){
     .profile__info{
-        gap: 14px;
         margin: 22.25px auto 36px auto;
+        gap: 14px;
         max-width: 282px;
         width: 100%;
     }

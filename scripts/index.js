@@ -8,12 +8,12 @@ let jobInput = document.querySelector('.popup__text_value_profession');
 let formElemnt = document.querySelector('.popup__container')
 
 
-
+nameInput.value = profileName.textContent
+jobInput.value = profileJob.textContent
 
 function openPopup() {
     popup.classList.add('popup_opened');
-    nameInput.value = profileName.textContent
-    jobInput.value = profileJob.textContent
+    
 }
 
 function closePopup() {

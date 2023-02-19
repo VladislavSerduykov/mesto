@@ -4,9 +4,14 @@
     gap: 18px; 
 }
 
+@media screen and (max-width:560px) {
+    .profile__info-name{
+        justify-content: center;
+    }
+}
+
 @media screen and (max-width: 370px){
     .profile__info-name{
-        gap:10px;
-        justify-content: center;
+        gap: 10px;
     }
 }

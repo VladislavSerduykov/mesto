@@ -1,7 +1,7 @@
 .profile__add{
     width: 150px;
     height: 50px;
-    background-image: url(../../../images/Add\ Button.png);
+    background-image: url(../../../images/Add\ Button.svg);
     box-sizing: border-box;
     border: 1px solid #fff;
     background-color: transparent;
@@ -18,9 +18,9 @@
     opacity: .6;
   }
 
-@media screen and (max-width: 370px){
+@media screen and (max-width: 560px){
     .profile__add{
-        background-image: url(../../../images/Add\ Button\ 320px.png);
+        background-image: url(../../../images/Add\ Button\ 320px.svg);
         width: 282px;
     }
 }
