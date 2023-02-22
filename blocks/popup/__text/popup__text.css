@@ -16,6 +16,10 @@
     outline: none;
 }
 
+.popup__text::placeholder{
+    color: #C4C4C4;
+}
+
 @media screen and (max-width: 370px){
     .popup__text{
         margin: 26px 22px 0 22px;

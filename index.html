@@ -23,65 +23,49 @@
             </div>
             <button class="profile__add" type="button"></button>
         </section>
-        <section class="gallery">
-            <article class="gallery__element">
-                <img class="gallery__image" src="./images/church.jpg" alt="Храм на горе">
-                <div class="gallery__description">
-                    <h2 class="gallery__caption">Карачаевск</h2>
-                    <button class="gallery__like" type="button"></button>
-                </div>
-            </article>
-            <article class="gallery__element">
-                <img class="gallery__image" src="./images/elbrus.jpg" alt="Вид на гору Эльбрус">
-                <div class="gallery__description">
-                    <h2 class="gallery__caption">Гора Эльбрус</h2>
-                    <button class="gallery__like" type="button"></button>
-                </div>
-            </article>
-            <article class="gallery__element">
-                <img class="gallery__image" src="./images/dombai.jpg" alt="Гора Домбай">
-                <div class="gallery__description">
-                    <h2 class="gallery__caption">Домбай</h2>
-                    <button class="gallery__like" type="button"></button>
-                </div>
-            </article>
-            <article class="gallery__element">
-                <img class="gallery__image" src="./images/elbrus.jpg" alt="Вид на гору Эльбрус">
-                <div class="gallery__description">
-                    <h2 class="gallery__caption">Гора Эльбрус</h2>
-                    <button class="gallery__like" type="button"></button>
-                </div>
-            </article>
-            <article class="gallery__element">
-                <img class="gallery__image" src="./images/dombai.jpg" alt="Гора Домбай">
-                <div class="gallery__description">
-                    <h2 class="gallery__caption">Домбай</h2>
-                    <button class="gallery__like" type="button"></button>
-                </div>
-            </article>
-            <article class="gallery__element">
-                <img class="gallery__image" src="./images/church.jpg" alt="Храм на горе">
-                <div class="gallery__description">
-                    <h2 class="gallery__caption">Карачаево-Черкесия</h2>
-                    <button class="gallery__like" type="button"></button>
-                </div>
-            </article>
+        <section class="gallery"> 
         </section>
     </main>
     <footer class="footer">
         <p class="footer__text">© 2020 Mesto Russia</p>
     </footer>
-    <section class="popup">
+    <section class="popup popup__zoom">
+            <button class="popup__close" type="button"></button>
+            <img class="gallery__image" src="./images/church.jpg" alt="Храм на горе">
+            <p class="popup__caption">Карачаевск</p>
+    </section>
+    <section class="popup popup_value_add">
+        <div class="popup__container">
+            <button class="popup__close" type="button"></button>
+            <h2 class="popup__title">Новое место</h2>
+            <form class="popup__form" name="save-new-gallery-element">
+                <input class="popup__text popup__text_value_name_place" type="text" name="name_place" placeholder="Название">
+                <input class="popup__text popup__text_value_link" type="text" name="link" placeholder="Ссылка на картинку">
+                <button class="popup__button popup__button_add" type="submit">Создать</button>
+            </form>
+        </div>
+    </section>
+    <section class="popup popup_value_edit">
         <div class="popup__container">
             <button class="popup__close" type="button"></button>
             <h2 class="popup__title">Редактировать профиль</h2>
             <form class="popup__form" name="save-name-profession">
                 <input class="popup__text popup__text_value_name" type="text" name="name">
                 <input class="popup__text popup__text_value_profession" type="text" name="profession">
-                <button class="popup__save" type="submit">Сохранить</button>
+                <button class="popup__button popup__button_save" type="submit">Сохранить</button>
             </form>
         </div>
     </section>
+    <template id="gallery__element">
+        <article class="gallery__element">
+            <button class="gallery__delete" type="button"></button>
+            <img class="gallery__image" alt="Вид на гору Эльбрус">
+            <div class="gallery__description">
+                <h2 class="gallery__caption"></h2>
+                <button class="gallery__like" type="button"></button>
+            </div>
+        </article>
+    </template>
     <script src="./scripts/index.js"></script>
 </body>
 </html>
