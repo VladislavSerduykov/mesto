@@ -50,9 +50,15 @@
         <div class="popup__container">
             <button class="popup__close" type="button"></button>
             <h2 class="popup__title">Новое место</h2>
-            <form class="popup__form" name="save-new-gallery-element">
-                <input class="popup__text popup__text_value_name-place" type="text" name="name_place" placeholder="Название">
-                <input class="popup__text popup__text_value_link" type="text" name="link" placeholder="Ссылка на картинку">
+            <form class="popup__form" name="save-new-gallery-element" novalidate>
+                <label class="popup__input-fields">
+                    <input id="place-input" class="popup__text popup__text_value_name-place" type="text" name="name_place" placeholder="Название" minlength="2" maxlength="30" required>
+                    <span class="place-input-error popup__input-error"></span>
+                </label>
+                <label class="popup__input-fields">
+                    <input id="link-input" class="popup__text popup__text_value_link" type="url" name="link" placeholder="Ссылка на картинку" required>
+                    <span class="link-input-error popup__input-error"></span>
+                </label>
                 <button class="popup__button popup__button_add" type="submit">Создать</button>
             </form>
         </div>
@@ -61,13 +67,20 @@
         <div class="popup__container">
             <button class="popup__close" type="button"></button>
             <h2 class="popup__title">Редактировать профиль</h2>
-            <form class="popup__form" name="save-name-profession">
-                <input class="popup__text popup__text_value_name" type="text" name="name">
-                <input class="popup__text popup__text_value_profession" type="text" name="profession">
+            <form class="popup__form" name="save-name-profession" novalidate>
+                <label class="popup__input-fields">
+                    <input id="name-input" class="popup__text popup__text_value_name" type="text" name="name" minlength="2" maxlength="40" required>
+                    <span class="name-input-error popup__input-error"></span>
+                </label>
+                <label class="popup__input-fields">
+                    <input id="profession-input" class="popup__text popup__text_value_profession" type="text" name="profession" minlength="2" maxlength="200" required>
+                    <span class="profession-input-error popup__input-error"></span>
+                </label>
                 <button class="popup__button popup__button_save" type="submit">Сохранить</button>
             </form>
         </div>
     </section>
+    <script src="./scripts/validation.js"></script>
     <script src="./scripts/cards.js"></script>
     <script src="./scripts/index.js"></script>
 </body>

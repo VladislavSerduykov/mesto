@@ -19,6 +19,7 @@ const popupImage = document.querySelector('.popup__image');
 const popupImageCaption = document.querySelector('.popup__image-caption');
 const closeButtonZoom = document.querySelector('section.popup_value_image button.popup__close');
 const articleTemplate = document.querySelector('#gallery__element').content;
+const inputList = Array.from(document.querySelectorAll('.popup__text'))
 
 
 function createGallery(items){
@@ -54,6 +55,7 @@ function addPlace(evt){
   gallery.prepend(newCard);
 
   closePopup(popupAdd);
+  evt.target.reset();
 }
 
 function handleForm(evt){
@@ -68,10 +70,30 @@ function handleForm(evt){
 
 function openPopup(popup){
    popup.classList.add('popup_opened');
+
+   popup.addEventListener('click', (evt) => {
+    if(evt.target.classList.contains('popup')){
+      closePopup(popup);
+    }
+  })
+
+  inputList.forEach((input)=>{
+    input.addEventListener('keydown', (evt) => {
+      if(evt.key === 'Enter'){
+        closePopup(popup);
+      }
+    })
+  })
+
+  document.addEventListener('keydown', (evt) => {
+    if(evt.key === 'Escape'){
+      popup.classList.remove('popup_opened')
+    }
+  });
 }
 
-function closePopup(popup){
-  popup.classList.remove('popup_opened')
+function closePopup(popup,input1, input2){
+  popup.classList.remove('popup_opened');
 }
 
 createGallery(arrGallery);
@@ -85,4 +107,4 @@ addElement.addEventListener('click',() => openPopup(popupAdd));
 closeAddElement.addEventListener('click',() => closePopup(popupAdd));
 closeButtonZoom.addEventListener('click', () => closePopup(popupZoom))
 formEditElement.addEventListener('submit', handleForm);
-formAddPlace.addEventListener('submit',addPlace)
+formAddPlace.addEventListener('submit',addPlace);

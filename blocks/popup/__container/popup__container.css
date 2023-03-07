@@ -4,8 +4,9 @@
     background-color: #fff;
     max-width: 430px;
     position: relative;
-    padding: 0;
+    padding: 34px 36px 37px;
     margin: 0;
+    box-sizing: border-box;
 }
 
 @media screen and (max-width: 540px){

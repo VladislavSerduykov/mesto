@@ -1,5 +1,5 @@
-.popup__form{
+.popup__input-fields{
     display: flex;
     flex-direction: column;
-    padding: 54px 0 0 0;
+    gap: 5px;
 }
