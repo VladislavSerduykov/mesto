@@ -64,7 +64,6 @@ function handleForm(evt){
 
     profileName.textContent = nameInput.value;
     profileJob.textContent = jobInput.value;
-
     closePopup(popupEdit);
 }
 
@@ -92,7 +91,7 @@ function openPopup(popup){
   });
 }
 
-function closePopup(popup,input1, input2){
+function closePopup(popup){
   popup.classList.remove('popup_opened');
 }
 
