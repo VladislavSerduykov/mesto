@@ -94,8 +94,8 @@ function closePopup(popup) {
 
 createGallery(arrGallery);
 editProfile.addEventListener("click", () => {
-  nameInput.value = profileName.textContent;
-  jobInput.value = profileJob.textContent;
+  formEdit.elements.name.value = profileName.textContent;
+  formEdit.elements.profession.value = profileJob.textContent;
   openPopup(popupEdit);
 });
 addElement.addEventListener("click", () => openPopup(popupAdd));
