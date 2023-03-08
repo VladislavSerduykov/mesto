@@ -57,9 +57,8 @@ function addPlace(evt) {
 
   gallery.prepend(newCard);
 
-  if (evt.key === "Enter") {
-    closePopup(popupAdd);
-  }
+  evt.target.reset();
+
   closePopup(popupAdd);
 }
 
@@ -69,9 +68,6 @@ function handleProfileFormSubmit(evt) {
   profileName.textContent = formEdit.elements.name.value;
   profileJob.textContent = formEdit.elements.profession.value;
 
-  if (evt.key === "Enter") {
-    closePopup(popupEdit);
-  }
   closePopup(popupEdit);
 }
 
