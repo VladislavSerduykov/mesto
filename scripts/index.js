@@ -1,3 +1,7 @@
+import { Card } from "./card.js";
+import { arrGallery } from "./cards.js";
+import { Validation } from "./enableValidation.js";
+
 const editProfile = document.querySelector(".profile__edit");
 const popupEdit = document.querySelector(".popup_value_edit");
 const formEdit = document.forms["save-name-profession"];
@@ -6,56 +10,39 @@ const popupAdd = document.querySelector(".popup_value_add");
 const profileName = document.querySelector(".profile__name");
 const profileJob = document.querySelector(".profile__profession");
 const formAddPlace = document.forms["save-new-gallery-element"];
-const addPlaceButton = document.querySelector(".popup__button_add");
 const gallery = document.querySelector(".gallery");
-const popupZoom = document.querySelector(".popup_value_image");
-const popupImage = document.querySelector(".popup__image");
-const popupImageCaption = document.querySelector(".popup__image-caption");
-const articleTemplate = document.querySelector("#gallery__element").content;
 const popups = document.querySelectorAll(".popup");
+const validation = new Validation({
+  formSelector: ".popup__form",
+  inputSelector: ".popup__text",
+  submitButtonSelector: ".popup__button",
+  inactiveButtonClass: "popup__button_inactive",
+  inputErrorClass: "popup__text_type_error",
+  errorClass: "popup__input-error_active",
+});
 
 function createGallery(items) {
   items.forEach((item) => {
-    const card = createCard(item.link, item.name);
-    gallery.append(card);
-  });
-}
+    const card = new Card(item, "#gallery__element");
+    const cardElement = card.generateCard();
 
-function createCard(image, name) {
-  const articleElement = articleTemplate
-    .querySelector(".gallery__element")
-    .cloneNode(true);
-  const articleImage = articleElement.querySelector(".gallery__image");
-  articleImage.src = image;
-  articleElement.querySelector(".gallery__caption").textContent = name;
-  articleImage.alt = name;
-  articleElement
-    .querySelector(".gallery__like")
-    .addEventListener("click", (evt) =>
-      evt.currentTarget.classList.toggle("gallery__like_active")
-    );
-  articleElement
-    .querySelector(".gallery__delete")
-    .addEventListener("click", () => articleElement.remove());
-  articleImage.addEventListener("click", () => {
-    popupImage.src = image;
-    popupImageCaption.textContent = name;
-    popupImage.alt = name;
-    openPopup(popupZoom);
+    gallery.append(cardElement);
   });
-
-  return articleElement;
 }
 
 function addPlace(evt) {
   evt.preventDefault();
 
-  const newCard = createCard(
-    formAddPlace.elements.link.value,
-    formAddPlace.elements.name_place.value
+  const newCard = new Card(
+    {
+      name: formAddPlace.elements.link.value,
+      link: formAddPlace.elements.name_place.value,
+    },
+    "#gallery__element"
   );
+  const newCardElement = newCard.generateCard();
 
-  gallery.prepend(newCard);
+  gallery.prepend(newCardElement);
 
   evt.target.reset();
 
@@ -78,7 +65,7 @@ function closeByEscape(evt) {
   }
 }
 
-function openPopup(popup) {
+export function openPopup(popup) {
   popup.classList.add("popup_opened");
   document.addEventListener("keydown", closeByEscape);
 }
@@ -88,7 +75,6 @@ function closePopup(popup) {
   document.removeEventListener("keydown", closeByEscape);
 }
 
-createGallery(arrGallery);
 editProfile.addEventListener("click", () => {
   formEdit.elements.name.value = profileName.textContent;
   formEdit.elements.profession.value = profileJob.textContent;
@@ -108,3 +94,7 @@ popups.forEach((popup) => {
     }
   });
 });
+
+createGallery(arrGallery);
+
+validation.enableValidation();
