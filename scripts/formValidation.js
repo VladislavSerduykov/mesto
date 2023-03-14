@@ -1,6 +1,6 @@
-export class Validation {
-  constructor(data) {
-    this._formSelector = data.formSelector;
+export class FormValidation {
+  constructor(data,form) {
+    this._formSelector = form;
     this._inputSelector = data.inputSelector;
     this._submitButtonSelector = data.submitButtonSelector;
     this._inactiveButtonClass = data.inactiveButtonClass;
@@ -73,9 +73,6 @@ export class Validation {
   }
 
   enableValidation() {
-    const forms = document.querySelectorAll(this._formSelector);
-    forms.forEach((form) => {
-      this._setEventListeners(form);
-    });
+    this._setEventListeners(this._formSelector);
   }
 }
