@@ -9,3 +9,10 @@
 .popup__button_inactive:hover{
     opacity: 0.5;
   }
+
+  @media screen and (max-width: 540px){
+    .popup__button_inactive{
+        margin: 14px 0 0 0;
+        width: 238px;
+    }
+}
