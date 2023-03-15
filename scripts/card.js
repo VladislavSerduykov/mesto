@@ -3,7 +3,7 @@ import {
   popupScale,
   popupImage,
   popupImageCaption,
-} from "./globalIndex.js";
+} from "./constants.js";
 
 export class Card {
   constructor(data, templateSelector) {

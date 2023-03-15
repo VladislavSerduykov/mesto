@@ -10,20 +10,23 @@ export class FormValidation {
     this._buttonElement = form.querySelector(this._submitButtonSelector);
   }
 
-  _showInputError(form, inputElement, errorMessage) {
+  _showInputError(inputElement, errorMessage) {
+    const errorElement = this._formSelector.querySelector(
+      `.${inputElement.id}-error`
+    );
     inputElement.classList.add(this._inputErrorClass);
-    form.querySelector(`.${inputElement.id}-error`).textContent = errorMessage;
-    form
-      .querySelector(`.${inputElement.id}-error`)
-      .classList.add(this._errorClass);
+    errorElement.textContent = errorMessage;
+    errorElement.classList.add(this._errorClass);
   }
 
-  _hideInputError(form, inputElement) {
+  _hideInputError(inputElement) {
+    const errorElement = this._formSelector.querySelector(
+      `.${inputElement.id}-error`
+    );
+
     inputElement.classList.remove(this._inputErrorClass);
-    form
-      .querySelector(`.${inputElement.id}-error`)
-      .classList.remove(this._errorClass);
-    form.querySelector(`.${inputElement.id}-error`).textContent = "";
+    errorElement.classList.remove(this._errorClass);
+    errorElement.textContent = "";
   }
 
   _hasValidInput(inputlist) {
@@ -42,17 +45,17 @@ export class FormValidation {
     }
   }
 
-  _isValid(form, inputElement) {
+  _isValid(inputElement) {
     if (!inputElement.validity.valid) {
-      this._showInputError(form, inputElement, inputElement.validationMessage);
+      this._showInputError(inputElement, inputElement.validationMessage);
     } else {
-      this._hideInputError(form, inputElement);
+      this._hideInputError(inputElement);
     }
   }
 
-  _clearErrorInput(formElement, inputList) {
-    inputList.forEach((input) => {
-      this._hideInputError(formElement, input);
+  clearErrorInput() {
+    this._inputList.forEach((input) => {
+      this._hideInputError(input);
     });
   }
 
@@ -67,7 +70,7 @@ export class FormValidation {
 
     this._inputList.forEach((input) => {
       input.addEventListener("input", () => {
-        this._isValid(form, input);
+        this._isValid(input);
         this._toggleButtonForm(this._inputList, this._buttonElement);
       });
     });

@@ -1,6 +1,6 @@
 import { Card } from "./card.js";
 import { FormValidation } from "./formValidation.js";
-import { openPopup, closeByEscape } from "./globalIndex.js";
+import { openPopup, closeByEscape } from "./constants.js";
 const buttonEditProfile = document.querySelector(".profile__edit");
 const popupEdit = document.querySelector(".popup_value_edit");
 const formEdit = document.forms["save-name-profession"];
@@ -38,7 +38,14 @@ const arrGallery = [
     link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
   },
 ];
-
+const formValidators = {};
+const formElements = {
+  inputSelector: ".popup__text",
+  submitButtonSelector: ".popup__button",
+  inactiveButtonClass: "popup__button_inactive",
+  inputErrorClass: "popup__text_type_error",
+  errorClass: "popup__input-error_active",
+};
 function createGallery(items) {
   items.forEach((item) => {
     const card = createCard(item, "#gallery__element");
@@ -83,16 +90,28 @@ function handleProfileFormSubmit(evt) {
 }
 
 function closePopup(popup) {
-  popup.classList.remove("popup_opened");
-  document.removeEventListener("keydown", closeByEscape);
+  if (popup.classList.contains("popup_value_add")) {
+    popup.classList.remove("popup_opened");
+    document.removeEventListener("keydown", closeByEscape);
+    formAddPlace.elements.name_place.value = "";
+    formAddPlace.elements.link.value = "";
+  } else {
+    popup.classList.remove("popup_opened");
+    document.removeEventListener("keydown", closeByEscape);
+  }
 }
 
 buttonEditProfile.addEventListener("click", () => {
+  formValidators["save-name-profession"].clearErrorInput();
+
   formEdit.elements.name.value = profileName.textContent;
   formEdit.elements.profession.value = profileJob.textContent;
   openPopup(popupEdit);
 });
-buttonAddPlace.addEventListener("click", () => openPopup(popupAdd));
+buttonAddPlace.addEventListener("click", () => {
+  formValidators["save-new-gallery-element"].clearErrorInput();
+  openPopup(popupAdd);
+});
 formEdit.addEventListener("submit", handleProfileFormSubmit);
 formAddPlace.addEventListener("submit", addPlace);
 createGallery(arrGallery);
@@ -108,15 +127,7 @@ popups.forEach((popup) => {
 });
 
 formsPopup.forEach((form) => {
-  const validationForm = new FormValidation(
-    {
-      inputSelector: ".popup__text",
-      submitButtonSelector: ".popup__button",
-      inactiveButtonClass: "popup__button_inactive",
-      inputErrorClass: "popup__text_type_error",
-      errorClass: "popup__input-error_active",
-    },
-    form
-  );
+  const validationForm = new FormValidation(formElements, form);
+  formValidators[form.getAttribute("name")] = validationForm;
   validationForm.enableValidation();
 });
