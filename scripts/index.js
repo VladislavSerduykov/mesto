@@ -90,15 +90,8 @@ function handleProfileFormSubmit(evt) {
 }
 
 function closePopup(popup) {
-  if (popup.classList.contains("popup_value_add")) {
-    popup.classList.remove("popup_opened");
-    document.removeEventListener("keydown", closeByEscape);
-    formAddPlace.elements.name_place.value = "";
-    formAddPlace.elements.link.value = "";
-  } else {
-    popup.classList.remove("popup_opened");
-    document.removeEventListener("keydown", closeByEscape);
-  }
+  popup.classList.remove("popup_opened");
+  document.removeEventListener("keydown", closeByEscape);
 }
 
 buttonEditProfile.addEventListener("click", () => {
@@ -109,6 +102,8 @@ buttonEditProfile.addEventListener("click", () => {
   openPopup(popupEdit);
 });
 buttonAddPlace.addEventListener("click", () => {
+  formAddPlace.elements.name_place.value = "";
+  formAddPlace.elements.link.value = "";
   formValidators["save-new-gallery-element"].clearErrorInput();
   openPopup(popupAdd);
 });
