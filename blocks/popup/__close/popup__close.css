@@ -3,7 +3,7 @@
     border: none;
     width: 32px;
     height: 32px;
-    background: url(../../../images/Close\ Icon.svg);
+    background: url(../../../images/Close_Icon.svg);
     cursor: pointer;
     position: absolute;
     top: -40px;
@@ -18,7 +18,7 @@
     .popup__close{
         width: 20px;
         height: 20px;
-        background: url(../../../images/Close\ Icon\ 320px.svg);
+        background: url(../../../images/Close_Icon_320px.svg);
         top: -36px;
         right: 0;
     }
