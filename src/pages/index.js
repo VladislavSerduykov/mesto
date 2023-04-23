@@ -1,10 +1,10 @@
-import { Card } from "../scripts/card.js";
-import { FormValidation } from "../scripts/formValidation.js";
-import Section from "../scripts/Section.js";
-import "../styles/index.css";
-import PopupWithImage from "../scripts/PopupWithImage.js";
-import PopupWithForm from "../scripts/PopupWithForm.js";
-import UserInfo from "../scripts/UserInfo.js";
+import {Card} from "../components/Card.js"
+import { FormValidation } from "../components/FormValidation.js";
+import Section from "../components/Section.js";
+import "../pages/index.css";
+import PopupWithImage from "../components/PopupWithImage.js";
+import PopupWithForm from "../components/PopupWithForm.js";
+import UserInfo from "../components/UserInfo.js";
 import {
   popupScale,
   buttonEditProfile,
@@ -14,24 +14,18 @@ import {
   popupAdd,
   profileName,
   profileJob,
-  formAddPlace,
   gallery,
-  formsPopup,
+  formPopups,
   templateSelector,
   arrGallery,
-} from "../scripts/constants.js";
+  formValidators,
+  formElements
+} from "../utils/constants.js";
 
-const formValidators = {};
-const formElements = {
-  inputSelector: ".popup__text",
-  submitButtonSelector: ".popup__button",
-  inactiveButtonClass: "popup__button_inactive",
-  inputErrorClass: "popup__text_type_error",
-  errorClass: "popup__input-error_active",
-};
+
 // Создание новой Секции
 const section = new Section(
-  { items: arrGallery, renderer: createCard },
+  {items: arrGallery,renderer: createCard},
   gallery
 );
 section.renderElements();
@@ -57,7 +51,7 @@ profileEditPopup.setEventListeners();
 // Добавление слушателей и попапа для добавления новой карточки
 const popupAddPlace = new PopupWithForm(popupAdd, (data) => {
   const newCard = createCard(data);
-  section.addItem(newCard);
+  section.prependItem(newCard);
 });
 popupAddPlace.setEventListeners();
 // Открытие попапа с увеличенным изображением
@@ -78,12 +72,10 @@ buttonEditProfile.addEventListener("click", () => {
 
 buttonAddPlace.addEventListener("click", () => {
   popupAddPlace.open();
-  formAddPlace.elements.name_place.value = "";
-  formAddPlace.elements.link.value = "";
   formValidators["save-new-gallery-element"].clearErrorInput();
 });
 
-formsPopup.forEach((form) => {
+formPopups.forEach((form) => {
   const validationForm = new FormValidation(formElements, form);
   formValidators[form.getAttribute("name")] = validationForm;
   validationForm.enableValidation();

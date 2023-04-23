@@ -8,11 +8,11 @@
 </head>
 <body class="page">
     <header class="header">
-            <img class="header__logo" src="<%=require('../images/logo.svg')%>" alt="Логотип">
+            <img class="header__logo" src="<%=require('../src/images/logo.svg')%>" alt="Логотип">
     </header>
     <main>
         <section class="profile">
-            <img class="profile__image" src="<%=require('../images/Avatar.png')%>" alt="Фото профиля">
+            <img class="profile__image" src="<%=require('../src/images/Avatar.png')%>" alt="Фото профиля">
             <div class="profile__info">
                 <div class="profile__info-name">
                     <h1 class="profile__name">Жак-Ив Кусто</h1>
@@ -51,7 +51,7 @@
             <h2 class="popup__title">Новое место</h2>
             <form class="popup__form" name="save-new-gallery-element" novalidate>
                 <label class="popup__input-fields">
-                    <input id="place-input" class="popup__text popup__text_value_name-place" type="text" name="name_place" placeholder="Название" minlength="2" maxlength="30" required>
+                    <input id="place-input" class="popup__text popup__text_value_name-place" type="text" name="name" placeholder="Название" minlength="2" maxlength="30" required>
                     <span class="place-input-error popup__input-error"></span>
                 </label>
                 <label class="popup__input-fields">

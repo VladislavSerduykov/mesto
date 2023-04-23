@@ -6,7 +6,7 @@ export class FormValidation {
     this._inactiveButtonClass = data.inactiveButtonClass;
     this._inputErrorClass = data.inputErrorClass;
     this._errorClass = data.errorClass;
-    this._inputList = Array.from(form.querySelectorAll(this._inputSelector));
+    this._inputLists = Array.from(form.querySelectorAll(this._inputSelector));
     this._buttonElement = form.querySelector(this._submitButtonSelector);
   }
 
@@ -30,7 +30,7 @@ export class FormValidation {
   }
 
   _hasValidInput() {
-    return this._inputList.some((input) => {
+    return this._inputLists.some((input) => {
       return !input.validity.valid;
     });
   }
@@ -54,7 +54,7 @@ export class FormValidation {
   }
 
   clearErrorInput() {
-    this._inputList.forEach((input) => {
+    this._inputLists.forEach((input) => {
       this._hideInputError(input);
     });
   }
@@ -68,7 +68,7 @@ export class FormValidation {
       }, 0);
     });
 
-    this._inputList.forEach((input) => {
+    this._inputLists.forEach((input) => {
       input.addEventListener("input", () => {
         this._isValid(input);
         this._toggleButtonForm();
