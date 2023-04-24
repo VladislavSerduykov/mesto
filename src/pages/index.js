@@ -1,4 +1,4 @@
-import {Card} from "../components/Card.js"
+import { Card } from "../components/Card.js";
 import { FormValidation } from "../components/FormValidation.js";
 import Section from "../components/Section.js";
 import "../pages/index.css";
@@ -19,13 +19,12 @@ import {
   templateSelector,
   arrGallery,
   formValidators,
-  formElements
+  formElements,
 } from "../utils/constants.js";
-
 
 // Создание новой Секции
 const section = new Section(
-  {items: arrGallery,renderer: createCard},
+  { items: arrGallery, renderer: createCard },
   gallery
 );
 section.renderElements();
@@ -64,7 +63,7 @@ function handleCardClick(imageLink, imageText) {
 
 buttonEditProfile.addEventListener("click", () => {
   profileEditPopup.open();
-  formValidators["save-name-profession"].clearErrorInput();
+  formValidators["save-name-profession"].clearInputsError();
   const userData = userInfo.getUserInfo();
   formEdit.elements.name.value = userData.name;
   formEdit.elements.profession.value = userData.profession;
@@ -72,7 +71,7 @@ buttonEditProfile.addEventListener("click", () => {
 
 buttonAddPlace.addEventListener("click", () => {
   popupAddPlace.open();
-  formValidators["save-new-gallery-element"].clearErrorInput();
+  formValidators["save-new-gallery-element"].clearInputsError();
 });
 
 formPopups.forEach((form) => {

@@ -1,6 +1,6 @@
 export class FormValidation {
   constructor(data, form) {
-    this._formSelector = form;
+    this._form = form;
     this._inputSelector = data.inputSelector;
     this._submitButtonSelector = data.submitButtonSelector;
     this._inactiveButtonClass = data.inactiveButtonClass;
@@ -11,18 +11,14 @@ export class FormValidation {
   }
 
   _showInputError(inputElement, errorMessage) {
-    const errorElement = this._formSelector.querySelector(
-      `.${inputElement.id}-error`
-    );
+    const errorElement = this._form.querySelector(`.${inputElement.id}-error`);
     inputElement.classList.add(this._inputErrorClass);
     errorElement.textContent = errorMessage;
     errorElement.classList.add(this._errorClass);
   }
 
   _hideInputError(inputElement) {
-    const errorElement = this._formSelector.querySelector(
-      `.${inputElement.id}-error`
-    );
+    const errorElement = this._form.querySelector(`.${inputElement.id}-error`);
 
     inputElement.classList.remove(this._inputErrorClass);
     errorElement.classList.remove(this._errorClass);
@@ -53,7 +49,7 @@ export class FormValidation {
     }
   }
 
-  clearErrorInput() {
+  clearInputsError() {
     this._inputLists.forEach((input) => {
       this._hideInputError(input);
     });
@@ -62,7 +58,7 @@ export class FormValidation {
   _setEventListeners() {
     this._toggleButtonForm();
 
-    this._formSelector.addEventListener("reset", () => {
+    this._form.addEventListener("reset", () => {
       setTimeout(() => {
         this._toggleButtonForm();
       }, 0);
@@ -77,6 +73,6 @@ export class FormValidation {
   }
 
   enableValidation() {
-    this._setEventListeners(this._formSelector);
+    this._setEventListeners(this._form);
   }
 }

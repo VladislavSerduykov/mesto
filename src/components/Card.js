@@ -3,9 +3,9 @@ export class Card {
     this._name = data.name;
     this._handleCardClick = handleCardClick;
     this._link = data.link;
-    this._image = ".gallery__image";
     this._templateSelector = templateSelector;
-    this._cardImage = this._getTemplate();
+    this._element = this._getTemplate();
+    this._cardImage = this._element.querySelector(".gallery__image");
   }
 
   _getTemplate() {
@@ -18,7 +18,7 @@ export class Card {
   }
 
   _setLikeListener() {
-    this._cardImage
+    this._element
       .querySelector(".gallery__like")
       .addEventListener("click", (evt) => {
         evt.currentTarget.classList.toggle("gallery__like_active");
@@ -26,16 +26,16 @@ export class Card {
   }
 
   _setRemoveListener() {
-    this._cardImage
+    this._element
       .querySelector(".gallery__delete")
       .addEventListener("click", () => {
-        this._cardImage.remove();
-        this._cardImage = null;
+        this._element.remove();
+        this._element = null;
       });
   }
 
   _setScaleListener() {
-    this._cardImage.querySelector(this._image).addEventListener("click", () => {
+    this._cardImage.addEventListener("click", () => {
       this._handleCardClick(this._name, this._link);
     });
   }
@@ -43,11 +43,11 @@ export class Card {
   generateCard() {
     this._setEventListeners();
 
-    this._cardImage.querySelector(this._image).src = this._link;
-    this._cardImage.querySelector(this._image).alt = this._name;
-    this._cardImage.querySelector(".gallery__caption").textContent = this._name;
+    this._cardImage.src = this._link;
+    this._cardImage.alt = this._name;
+    this._element.querySelector(".gallery__caption").textContent = this._name;
 
-    return this._cardImage;
+    return this._element;
   }
 
   _setEventListeners() {
