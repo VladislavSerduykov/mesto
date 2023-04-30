@@ -5,6 +5,7 @@ import "../pages/index.css";
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
+import Api from "../components/Api.js";
 import {
   popupScale,
   buttonEditProfile,
@@ -17,18 +18,16 @@ import {
   gallery,
   formPopups,
   templateSelector,
-  arrGallery,
   formValidators,
   formElements,
+  profileImage,
 } from "../utils/constants.js";
+import { config } from "../utils/api.js";
 
-// Создание новой Секции
-const section = new Section(
-  { items: arrGallery, renderer: createCard },
-  gallery
-);
-section.renderElements();
+const api = new Api(config);
+api.getUserInfo();
 
+const section = new Section(createCard, gallery)
 // Создание новой карточки
 function createCard(data) {
   const card = new Card(data, templateSelector, handleCardClick);
@@ -38,10 +37,18 @@ function createCard(data) {
   return cardElement;
 }
 // Получение данных о пользователе
-const userInfo = new UserInfo({ name: profileName, profession: profileJob });
+const userInfo = new UserInfo({
+  userName: profileName,
+  userProfession: profileJob,
+  userImage: profileImage
+});
 
 const profileEditPopup = new PopupWithForm(popupEdit, (data) => {
-  userInfo.setUserInfo(data);
+  api.changeUserInfo(data).then((res) => {
+    userInfo.User(res);
+    userInfo.setUserName();
+    userInfo.setUserProfession();
+  });
   profileEditPopup.close();
 });
 
@@ -49,8 +56,11 @@ profileEditPopup.setEventListeners();
 
 // Добавление слушателей и попапа для добавления новой карточки
 const popupAddPlace = new PopupWithForm(popupAdd, (data) => {
-  const newCard = createCard(data);
-  section.prependItem(newCard);
+  api.addNewCard(data)
+    .then(res => {
+      section.prependItem(createCard(res))
+      popupAddPlace.close()
+    })
 });
 popupAddPlace.setEventListeners();
 // Открытие попапа с увеличенным изображением
@@ -60,6 +70,20 @@ popupWithImage.setEventListeners();
 function handleCardClick(imageLink, imageText) {
   popupWithImage.open(imageLink, imageText);
 }
+
+Promise.all([
+  api.getUserInfo(),
+  api.getCardList()
+])
+    .then((results) => {
+    userInfo.User(results[0]);
+    userInfo.setUserName();
+    userInfo.setUserProfession();
+    userInfo.setuserImage();
+
+    section.renderElements(results[1])
+})
+    .catch(err => console.error(err));
 
 buttonEditProfile.addEventListener("click", () => {
   profileEditPopup.open();

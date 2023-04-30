@@ -12,7 +12,10 @@
     </header>
     <main>
         <section class="profile">
-            <img class="profile__image" src="<%=require('../src/images/Avatar.png')%>" alt="Фото профиля">
+            <div class="profile__avatar-container">
+                <img class="profile__image" src="<%=require('../src/images/Avatar.png')%>" alt="Фото профиля">
+                <button class="profile__avatarbtn" type="button"></button>
+            </div>
             <div class="profile__info">
                 <div class="profile__info-name">
                     <h1 class="profile__name">Жак-Ив Кусто</h1>
@@ -29,7 +32,10 @@
                     <img class="gallery__image">
                     <div class="gallery__description">
                         <h2 class="gallery__caption"></h2>
-                        <button class="gallery__like" type="button"></button>
+                        <div class="gallery__like-container">
+                            <button class="gallery__like" type="button"></button>
+                            <p class="gallery__like-counter"></p>
+                        </div>
                     </div>
                 </article>
             </template>
@@ -38,6 +44,26 @@
     <footer class="footer">
         <p class="footer__text">© 2020 Mesto Russia</p>
     </footer>
+    <div class="popup popup_value_confirm">
+        <div class="popup__container">
+            <button class="popup__close" type="button"></button>
+            <h2 class="popup__title-confirm">Вы уверены?</h2>
+            <button class="popup__button popup__button_confirm" type="submit">Да</button>
+        </div>
+    </div>
+    <div class="popup popup_value_avatar">
+        <div class="popup__container">
+            <button class="popup__close" type="button"></button>
+            <h2 class="popup__title">Обновить аватар</h2>
+            <form class="popup__form">
+                <label class="popup__input-fields">
+                    <input id="link-input" class="popup__text popup__text_value_link" type="url" name="avatar-link" placeholder="Ссылка на картинку" required>
+                    <span class="link-input-error popup__input-error"></span>
+                </label>
+                 <button class="popup__button popup__button_avatar" type="submit">Сохранить</button>
+            </form>
+        </div>
+    </div>
     <div class="popup popup_value_image">
         <figure class="popup__scale-container">
             <button class="popup__close" type="button"></button>
