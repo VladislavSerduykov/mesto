@@ -75,7 +75,7 @@ export default class Api {
       .catch((err) => console.log(err));
   }
 
-  setLikes(cardId) {
+  _addLikes(cardId) {
     const url = `${this._baseUrl}/cards/${cardId}/likes`;
 
     return fetch(url, {
@@ -83,15 +83,16 @@ export default class Api {
       headers: this._headers,
     })
       .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Ошибка: ${res.status}`);
+        if (res.ok) return res.json();
+        return res.json();
+      })
+      .then((res) => {
+        return res.likes;
       })
       .catch((err) => console.log(err));
   }
 
-  deleteLikes(cardId) {
+  _deleteLikes(cardId) {
     const url = `${this._baseUrl}/cards/${cardId}/likes`;
 
     return fetch(url, {
@@ -99,12 +100,21 @@ export default class Api {
       headers: this._headers,
     })
       .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Ошибка: ${res.status}`);
+        if (res.ok) return res.json();
+        return res.json();
+      })
+      .then((res) => {
+        return res.likes;
       })
       .catch((err) => console.log(err));
+  }
+
+  toggleLikes(cardId, isLiked) {
+    if (isLiked) {
+      return this._deleteLikes(cardId);
+    } else {
+      return this._addLikes(cardId);
+    }
   }
 
   deleteCard(cardId) {
@@ -115,21 +125,20 @@ export default class Api {
       headers: this._headers,
     })
       .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Ошибка: ${res.status}`);
+        if (res.ok) return Promise.resolve();
+        return res.json();
       })
       .catch((err) => console.log(err));
   }
 
-  setUserImage(link) {
+  setUserImage(data) {
     const url = `${this._baseUrl}/users/me/avatar`;
+
     return fetch(url, {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
-        avatar: link,
+        avatar: `${data.avatar}`,
       }),
     })
       .then((res) => {

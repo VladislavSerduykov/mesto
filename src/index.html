@@ -13,15 +13,15 @@
     <main>
         <section class="profile">
             <div class="profile__avatar-container">
-                <img class="profile__image" src="<%=require('../src/images/Avatar.png')%>" alt="Фото профиля">
+                <img class="profile__image" src="#" alt="Фото профиля">
                 <button class="profile__avatarbtn" type="button"></button>
             </div>
             <div class="profile__info">
                 <div class="profile__info-name">
-                    <h1 class="profile__name">Жак-Ив Кусто</h1>
+                    <h1 class="profile__name"></h1>
                     <button class="profile__edit" type="button"></button>
                 </div>
-                <p class="profile__profession">Исследователь Океана</p> 
+                <p class="profile__profession"></p> 
             </div>
             <button class="profile__add" type="button"></button>
         </section>
@@ -48,7 +48,9 @@
         <div class="popup__container">
             <button class="popup__close" type="button"></button>
             <h2 class="popup__title-confirm">Вы уверены?</h2>
-            <button class="popup__button popup__button_confirm" type="submit">Да</button>
+            <form class="popup__form" name="remove-card" novalidate>
+                <button class="popup__button popup__button_confirm" type="submit">Да</button>
+            </form>
         </div>
     </div>
     <div class="popup popup_value_avatar">
@@ -57,7 +59,7 @@
             <h2 class="popup__title">Обновить аватар</h2>
             <form class="popup__form">
                 <label class="popup__input-fields">
-                    <input id="link-input" class="popup__text popup__text_value_link" type="url" name="avatar-link" placeholder="Ссылка на картинку" required>
+                    <input id="link-input" class="popup__text popup__text_value_link" type="url" name="avatar" placeholder="Ссылка на картинку" required>
                     <span class="link-input-error popup__input-error"></span>
                 </label>
                  <button class="popup__button popup__button_avatar" type="submit">Сохранить</button>

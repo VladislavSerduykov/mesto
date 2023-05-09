@@ -1,5 +1,5 @@
-const cohortId = 'cohort-64'
-const token = '6cab5de8-5b45-4a25-b2f6-6cf575d48f88'
+const cohortId = 'cohort-65'
+const token = 'd66689bd-a4b2-435a-b216-8a223a62a546'
 
 export const config = {
     baseUrl: `https://mesto.nomoreparties.co/v1/${cohortId}`,

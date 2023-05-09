@@ -1,8 +1,10 @@
 export class Card {
   constructor(
-    { name, link, likes, owner, _id},
+    { name, link, likes, owner, _id },
     templateSelector,
     handleCardClick,
+    handleRemoveCard,
+    handleLikeCard,
     userId
   ) {
     this._id = _id;
@@ -12,11 +14,14 @@ export class Card {
     this._name = name;
     this._handleCardClick = handleCardClick;
     this._link = link;
+    this._isLiked = this._checkLiked();
     this._templateSelector = templateSelector;
     this._element = this._getTemplate();
     this._cardImage = this._element.querySelector(".gallery__image");
     this._likeButton = this._element.querySelector(".gallery__like");
-    this._likesCounter = this._element.querySelector('.gallery__like-counter')
+    this._likesCounter = this._element.querySelector(".gallery__like-counter");
+    this._handleRemoveCard = handleRemoveCard;
+    this._handleLikeCard = handleLikeCard;
   }
 
   _getTemplate() {
@@ -31,43 +36,51 @@ export class Card {
   _setLikeListener() {
     this._element
       .querySelector(".gallery__like")
-      .addEventListener("click", (evt) => {
-        evt.currentTarget.classList.toggle("gallery__like_active");
-      });
+      .addEventListener("click", this._likeCard());
   }
 
   blockLikesButton() {
     this._likeButton.disabled = true;
   }
 
-  unlockLikeButton(){
+  unlockLikeButton() {
     this._likeButton.disabled = false;
   }
 
   _setRemoveListener() {
-    this._element
-      .querySelector(".gallery__delete")
-      .addEventListener("click", () => {
-        this.deleteCard()
-      });
+    if (this._element.querySelector(".gallery__delete")) {
+      this._element
+        .querySelector(".gallery__delete")
+        .addEventListener("click", () => {
+          this._handleRemove();
+        });
+    }
   }
 
-  _checkLiked(){
-    return this._likes.some(user => user._id === this._userId)
+  _likeCard() {
+    this._handleLikeCard(this._id, this._isLiked);
   }
 
-  setLikeCounter(likes){
-    if(likes){
+  _checkLiked() {
+    return this._likes.some((user) => user._id === this._userId);
+  }
+
+  setLikeCounter(likes) {
+    if (likes) {
       this._likes = likes;
-      this._isLiked = this._checkLiked()
+      this._isLiked = this._checkLiked();
     }
     this._likesCounter.textContent = this._likes.length;
 
-    if(this._isLiked) {
-      this._likeButton.classList.add('.gallery__like_active')
+    if (this._isLiked) {
+      this._likeButton.classList.add("gallery__like_active");
     } else {
-      this._likeButton.classList.remove('.gallery__like_active')
+      this._likeButton.classList.remove("gallery__like_active");
     }
+  }
+
+  _handleRemove() {
+    this._handleRemoveCard(this._id);
   }
 
   _setScaleListener() {
@@ -83,6 +96,8 @@ export class Card {
     this._cardImage.alt = this._name;
     this._element.querySelector(".gallery__caption").textContent = this._name;
 
+    this.setLikeCounter();
+
     if (this._owner._id !== this._userId) {
       this._element.querySelector(".gallery__delete").remove();
     }
@@ -96,7 +111,7 @@ export class Card {
     this._setScaleListener();
   }
 
-  deleteCard(){
+  delete() {
     this._element.remove();
     this._element = null;
   }
