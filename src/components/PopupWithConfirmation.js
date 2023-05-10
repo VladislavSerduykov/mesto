@@ -19,12 +19,4 @@ export default class PopupWithConfirmation extends Popup {
   setTarget(target) {
     this._target = target;
   }
-
-  renderLoading(isLoading) {
-    if (isLoading) {
-      this._popupButton.textContent = "Сохранение...";
-    } else {
-      this._popupButton.textContent = this._defaultButtonText;
-    }
-  }
 }

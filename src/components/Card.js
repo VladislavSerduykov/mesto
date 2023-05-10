@@ -12,16 +12,18 @@ export class Card {
     this._likes = likes;
     this._userId = userId;
     this._name = name;
-    this._handleCardClick = handleCardClick;
     this._link = link;
-    this._isLiked = this._checkLiked();
     this._templateSelector = templateSelector;
+
+    this._isLiked = this._checkLiked();
     this._element = this._getTemplate();
-    this._cardImage = this._element.querySelector(".gallery__image");
     this._likeButton = this._element.querySelector(".gallery__like");
     this._likesCounter = this._element.querySelector(".gallery__like-counter");
+    this._cardImage = this._element.querySelector(".gallery__image");
+
     this._handleRemoveCard = handleRemoveCard;
     this._handleLikeCard = handleLikeCard;
+    this._handleCardClick = handleCardClick;
   }
 
   _getTemplate() {
@@ -36,14 +38,14 @@ export class Card {
   _setLikeListener() {
     this._element
       .querySelector(".gallery__like")
-      .addEventListener("click", this._likeCard());
+      .addEventListener("click", () => this._likeCard());
   }
 
-  blockLikesButton() {
+  hideLikeButton() {
     this._likeButton.disabled = true;
   }
 
-  unlockLikeButton() {
+  showLikeButton() {
     this._likeButton.disabled = false;
   }
 
