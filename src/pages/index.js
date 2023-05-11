@@ -29,44 +29,50 @@ import { config } from "../utils/api.js";
 import PopupWithConfirmation from "../components/PopupWithConfirmation.js";
 
 let userId;
-const cards = {};
 
 // Создание класса для взайимодействия с сервером
 const api = new Api(config);
 
 // Создание класса новой секции
-const section = new Section(createCard, gallery);
+const section = new Section((item) => {
+  section.appendItem(createCard(item));
+}, gallery);
 
 // Создание новой карточки
-function createCard(data) {
+const createCard = (data) => {
   const card = new Card(
     data,
     templateSelector,
     handleCardClick,
-    handleRemoveCard,
-    handleLikeCard,
+    () => {
+      handleRemoveCard(card);
+    },
+    () => {
+      handleLikeCard(card);
+    },
     userId
   );
-  cards[data._id] = card;
+
   return card.generateCard();
-}
+};
 // callback-функция для удаления карточки
-function handleRemoveCard(cardId) {
-  removeCardPopup.setTarget(cardId);
+function handleRemoveCard(card) {
+  removeCardPopup.setTarget(card);
   removeCardPopup.open();
 }
+
 // callback-функция для установки лайка карточки
-function handleLikeCard(cardId, isLiked) {
-  cards[cardId].hideLikeButton();
+function handleLikeCard(card) {
+  card.hideLikeButton();
 
   api
-    .toggleLikes(cardId, isLiked)
+    .toggleLikes(card._cardId, card._isLiked)
     .then((likes) => {
-      cards[cardId].setLikeCounter(likes);
+      card.setLikeCounter(likes);
     })
     .catch((err) => console.log(err))
     .finally(() => {
-      cards[cardId].showLikeButton();
+      card.showLikeButton();
     });
 }
 // Создание класса пользователя
@@ -75,12 +81,14 @@ const userInfo = new UserInfo({
   userProfession: profileJob,
   userImage: profileImage,
 });
+
 // Создание класса попапа с подтверждением удаления карточки
-const removeCardPopup = new PopupWithConfirmation(popupRemoveCard, (cardId) => {
+const removeCardPopup = new PopupWithConfirmation(popupRemoveCard, (card) => {
+  removeCardPopup.renderLoading(true);
   api
-    .deleteCard(cardId)
+    .deleteCard(card._cardId)
     .then(() => {
-      cards[cardId].delete();
+      card.delete();
       removeCardPopup.close();
     })
     .catch((err) => console.log(err))
@@ -88,7 +96,6 @@ const removeCardPopup = new PopupWithConfirmation(popupRemoveCard, (cardId) => {
       removeCardPopup.renderLoading(false);
     });
 });
-removeCardPopup.setEventListeners();
 
 // Создание класса попапа с изменения аватара пользователя
 const avatarEditPopup = new PopupWithForm(popupEditAvatar, (data) => {
@@ -98,6 +105,7 @@ const avatarEditPopup = new PopupWithForm(popupEditAvatar, (data) => {
     .then((res) => {
       userInfo.setUserInfo(res);
       avatarEditPopup.close();
+      avatarEditPopup.resetForm();
     })
     .catch((err) => {
       console.log(`Ошибка : ${err}`);
@@ -116,6 +124,7 @@ const profileEditPopup = new PopupWithForm(popupEdit, (data) => {
     .then((res) => {
       userInfo.setUserInfo(res);
       profileEditPopup.close();
+      profileEditPopup.resetForm();
     })
     .catch((err) => {
       console.log(`Ошибка : ${err}`);
@@ -134,6 +143,7 @@ const popupAddPlace = new PopupWithForm(popupAdd, (data) => {
     .then((res) => {
       section.prependItem(createCard(res));
       popupAddPlace.close();
+      popupAddPlace.resetForm();
     })
     .catch((err) => {
       console.log(`Ошибка: ${err}`);
@@ -182,3 +192,5 @@ formPopups.forEach((form) => {
   formValidators[form.getAttribute("name")] = validationForm;
   validationForm.enableValidation();
 });
+
+removeCardPopup.setEventListeners();

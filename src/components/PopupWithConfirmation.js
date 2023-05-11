@@ -9,11 +9,24 @@ export default class PopupWithConfirmation extends Popup {
     this._defaultButtonText = this._popupButton.textContent;
   }
 
+  _handleFormSubmit() {
+    this._handleSubmit(this._target);
+    this._form.addEventListener("submit", (evt) => {
+      evt.preventDefault();
+    });
+  }
+
   setEventListeners() {
     super.setEventListeners();
-    this._popupButton.addEventListener("click", () =>
-      this._handleSubmit(this._target)
-    );
+    this._popupButton.addEventListener("click", () => this._handleFormSubmit());
+  }
+
+  renderLoading(isLoading) {
+    if (isLoading) {
+      this._popupButton.textContent = "Удаление...";
+    } else {
+      this._popupButton.textContent = this._defaultButtonText;
+    }
   }
 
   setTarget(target) {

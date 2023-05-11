@@ -1,18 +1,19 @@
 export class Card {
   constructor(
-    { name, link, likes, owner, _id },
+    data,
     templateSelector,
     handleCardClick,
     handleRemoveCard,
     handleLikeCard,
     userId
   ) {
-    this._id = _id;
-    this._owner = owner;
-    this._likes = likes;
+    this._cardId = data._id;
+    this._owner = data.owner._id;
+    this._likes = data.likes;
+    this._name = data.name;
+    this._link = data.link;
+
     this._userId = userId;
-    this._name = name;
-    this._link = link;
     this._templateSelector = templateSelector;
 
     this._isLiked = this._checkLiked();
@@ -35,12 +36,6 @@ export class Card {
     return cardElement;
   }
 
-  _setLikeListener() {
-    this._element
-      .querySelector(".gallery__like")
-      .addEventListener("click", () => this._likeCard());
-  }
-
   hideLikeButton() {
     this._likeButton.disabled = true;
   }
@@ -49,18 +44,8 @@ export class Card {
     this._likeButton.disabled = false;
   }
 
-  _setRemoveListener() {
-    if (this._element.querySelector(".gallery__delete")) {
-      this._element
-        .querySelector(".gallery__delete")
-        .addEventListener("click", () => {
-          this._handleRemove();
-        });
-    }
-  }
-
   _likeCard() {
-    this._handleLikeCard(this._id, this._isLiked);
+    this._handleLikeCard(this._cardId, this._isLiked);
   }
 
   _checkLiked() {
@@ -82,13 +67,7 @@ export class Card {
   }
 
   _handleRemove() {
-    this._handleRemoveCard(this._id);
-  }
-
-  _setScaleListener() {
-    this._cardImage.addEventListener("click", () => {
-      this._handleCardClick(this._name, this._link);
-    });
+    this._handleRemoveCard(this._cardId);
   }
 
   generateCard() {
@@ -100,7 +79,7 @@ export class Card {
 
     this.setLikeCounter();
 
-    if (this._owner._id !== this._userId) {
+    if (this._owner !== this._userId) {
       this._element.querySelector(".gallery__delete").remove();
     }
 
@@ -108,9 +87,21 @@ export class Card {
   }
 
   _setEventListeners() {
-    this._setLikeListener();
-    this._setRemoveListener();
-    this._setScaleListener();
+    this._element
+      .querySelector(".gallery__like")
+      .addEventListener("click", () => this._likeCard());
+
+    this._cardImage.addEventListener("click", () => {
+      this._handleCardClick(this._name, this._link);
+    });
+
+    if (this._element.querySelector(".gallery__delete")) {
+      this._element
+        .querySelector(".gallery__delete")
+        .addEventListener("click", () => {
+          this._handleRemove();
+        });
+    }
   }
 
   delete() {
